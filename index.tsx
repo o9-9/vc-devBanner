@@ -1,5 +1,5 @@
 /* eslint-disable simple-header/header */
-/* eslint-disable no-duplicate-imports */
+
 /*
  * Vencord, a Discord client mod
  * Copyright (c) 2025 Vendicated and contributors
@@ -15,10 +15,8 @@ const settings = definePluginSettings({
         default: true,
         description: "Remove redundant close button, which might actually break plugin if accidentally pressed",
         restartNeeded: true,
-        hidden: true,
     }
 });
-
 
 // By default Discord only seems too displays 'Staging' so we map the names ourself
 const names: Record<string, string> = {
@@ -42,14 +40,14 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".devBanner,",
+            find: '"isHideDevBanner"',
             replacement: [
                 {
                     match: '"staging"===window.GLOBAL_ENV.RELEASE_CHANNEL',
                     replace: "true"
                 },
                 {
-                    predicate:() => settings.store.removeCloseButton,
+                    predicate: () => settings.store.removeCloseButton,
                     match: /(\i=\(\)=>)\(.*?\}\);/,
                     replace: "$1null;",
                 },
