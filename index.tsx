@@ -15,6 +15,7 @@ const settings = definePluginSettings({
         default: true,
         description: "Remove redundant close button, which might actually break plugin if accidentally pressed",
         restartNeeded: true,
+        hidden: true
     }
 });
 
